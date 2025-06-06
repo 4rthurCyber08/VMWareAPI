@@ -14,7 +14,7 @@ $env:Path += ";C:\Program Files (x86)\VMware\VMware Workstation\"
 Now vmrest is available in the cli.
 
 *********************
-2. Configure a self signed certificate for the API.
+2. Configure a self signed certificate for VMRest.
 
 To achieve this, we need a linux machine. For windows, you can simply install a linux using wsl.
   @powershell
@@ -26,4 +26,27 @@ Now to configure the certificate.
 @linux terminal
 mkdir /mnt/c/certs
 cd /mnt/c/certs
-openssl req x509 -sha256 -nodes -newkey -rsa4096 -keyout vmware-key.pem -out vmware-crt.pem
+openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout vmware-key.pem -out vmware-crt.pem -days 365
+Country: PH
+State or Province: NCR
+Locality: MKT
+Org Name: rivancorp
+Org Unit Name: rivancorp
+Common Name: desktop.rivancorp.com
+Email Address: 
+
+Verify the keys
+
+@Linux terminal
+ls
+
+
+*********************
+3. Configure VMRest
+
+@powershell
+vmrest -C
+User: admin
+Password: C1sc0123$
+
+vmrest -c .\path-to-your-certificate -k .\path-to-your-key -i your-pcs-ip-address
