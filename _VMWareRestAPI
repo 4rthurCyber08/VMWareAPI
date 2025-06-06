@@ -46,7 +46,20 @@ ls
 
 @powershell
 vmrest -C
-User: admin
-Password: C1sc0123$
+  User: admin
+  Password: C1sc0123$
 
-vmrest -c .\path-to-your-certificate -k .\path-to-your-key -i your-pcs-ip-address
+cd /certs
+vmrest -c .\vmware-crt.pem -k .\vmware-key.pem -i your-pcs-ip-address
+
+Now open VMRest on a browser based on the specified open socket (127.0.0.1:8697)
+
+
+*********************
+4. Access VMRest Web Interface
+
+Authorize access using the credentials:
+User: admin
+Pass: C1sc0123$
+
+
