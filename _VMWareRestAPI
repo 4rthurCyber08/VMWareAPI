@@ -1,1 +1,29 @@
+We can automate VMWare Workstation using its VMRest API Service
+  You can find VMRest.exe in the same directory as VMware.exe
+
+@powershell
+ls 'C:\Program Files (x86)\VMware\VMware Workstation\' | findstr vmrest
+
+
+*********************
 1. Set VMWare Workstation to Environmental Variables PATH
+
+@powershell
+$env:Path += ";C:\Program Files (x86)\VMware\VMware Workstation\"
+
+Now vmrest is available in the cli.
+
+*********************
+2. Configure a self signed certificate for the API.
+
+To achieve this, we need a linux machine. For windows, you can simply install a linux using wsl.
+  @powershell
+  wsl --install
+  wsl --install -d ubuntu
+
+Now to configure the certificate.
+
+@linux terminal
+mkdir /mnt/c/certs
+cd /mnt/c/certs
+openssl req x509 -sha256 -nodes -newkey -rsa4096 -keyout vmware-key.pem -out vmware-crt.pem
